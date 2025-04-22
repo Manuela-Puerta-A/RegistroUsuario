@@ -23,7 +23,7 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <Hyperlink fx:id="linkIniciarsesion" layoutX="191.0" layoutY="293.0" text="¿Ya tienes cuenta? Inicia Sesion" />
+            <Hyperlink fx:id="linkIniciarsesion" layoutX="191.0" layoutY="293.0" onAction="#onAbrirInicio" text="¿Ya tienes cuenta? Inicia Sesion" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

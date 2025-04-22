@@ -14,7 +14,7 @@
       <AnchorPane layoutX="20.0" layoutY="15.0" prefHeight="400.0" prefWidth="578.0">
          <children>
             <TextField fx:id="txtCorreo" layoutX="174.0" layoutY="124.0" prefHeight="26.0" prefWidth="268.0" />
-            <Button fx:id="btnIniciar" layoutX="227.0" layoutY="246.0" mnemonicParsing="false"  prefHeight="26.0" prefWidth="109.0" text="Iniciar Sesion " textFill="#1b00e7" />
+            <Button fx:id="btnIniciar" layoutX="227.0" layoutY="246.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="109.0" text="Iniciar Sesion " textFill="#1b00e7" />
             <PasswordField fx:id="txtContrasena" layoutX="174.0" layoutY="174.0" />
             <Label layoutX="84.0" layoutY="173.0" prefHeight="26.0" prefWidth="77.0" text="Contraseña:" />
             <Label layoutX="90.0" layoutY="127.0" prefHeight="26.0" prefWidth="47.0" text="Correo:" />
@@ -23,7 +23,7 @@
                   <Font size="26.0" />
                </font>
             </Label>
-            <Hyperlink fx:id="linkIniciarsesion" layoutX="191.0" layoutY="293.0" text="¿No tienes cuenta? Registrar" />
+            <Hyperlink fx:id="linkIniciarsesion" layoutX="191.0" layoutY="293.0" onAction="#onAbrirRegistro" text="¿No tienes cuenta? Registrar" />
          </children>
       </AnchorPane>
    </children>

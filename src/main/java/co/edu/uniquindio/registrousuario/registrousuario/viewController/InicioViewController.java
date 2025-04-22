@@ -1,4 +1,5 @@
 package co.edu.uniquindio.registrousuario.registrousuario.viewController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -45,19 +46,7 @@ public class InicioViewController {
         } else {
             System.out.println("btnIniciarSesion es null");
         }
-        linkIniciarsesion.setOnAction(event -> {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Usuario.fxml"));
-                Scene nuevaEscena = new Scene(fxmlLoader.load());
 
-                Stage nuevoStage = new Stage();
-                nuevoStage.setTitle("Registro de Usuario");
-                nuevoStage.setScene(nuevaEscena);
-                nuevoStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     private void iniciarSesion() {
@@ -72,4 +61,21 @@ public class InicioViewController {
             alert.showAndWait();
         }
     }
+    @FXML
+    void onAbrirRegistro(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Usuario.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Stage stage = (Stage) linkIniciarsesion.getScene().getWindow();
+
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }
