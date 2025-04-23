@@ -18,19 +18,16 @@ public class RegistroFacade {
 
     public void registrarUsuario(String nombre, String correo, String contrasena) {
 
-        // Validar datos
         if (!validador.validar(nombre, correo, contrasena)) {
             mostrarAlerta("Datos inválidos", "Verifica que el nombre no esté vacío, el correo sea válido y la contraseña tenga al menos 6 caracteres.");
             return;
         }
 
-        // Validar que el correo no esté registrado
         if (BaseDeDatosSimulada.existeUsuario(correo)) {
             mostrarAlerta("Correo duplicado", "El correo ya está registrado. Usa uno diferente.");
             return;
         }
 
-        // Crear usuario y guardar
         Usuario nuevoUsuario = new Usuario(nombre, correo, contrasena);
         baseDeDatos.guardarUsuario(nuevoUsuario);
 

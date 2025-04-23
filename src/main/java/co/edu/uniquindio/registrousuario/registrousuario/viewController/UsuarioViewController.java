@@ -51,12 +51,10 @@ public class UsuarioViewController {
             mostrarAlerta("El nombre no puede estar vacío");
             return false;
         }
-
         if (correo == null || !correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             mostrarAlerta("El correo electrónico no es válido");
             return false;
         }
-
         if (contrasena == null || !contrasena.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
             mostrarAlerta("La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números.");
             return false;
