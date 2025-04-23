@@ -1,21 +1,18 @@
 package co.edu.uniquindio.registrousuario.registrousuario.viewController;
+import co.edu.uniquindio.registrousuario.registrousuario.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Button;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import co.edu.uniquindio.registrousuario.registrousuario.proxy.ProxyAutentificador;
-
+import co.edu.uniquindio.registrousuario.registrousuario.model.BaseDeDatosSimulada;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.scene.control.Hyperlink;
 import javafx.stage.Stage;
 
 public class InicioViewController {
@@ -42,7 +39,7 @@ public class InicioViewController {
     @FXML
     private void initialize() {
         if (btnIniciar != null) {
-            btnIniciar.setOnAction(event -> {
+            btnIniciar.setOnAction(event -> { iniciarSesion();
                 // Acción para iniciar sesión
             });
         } else {
@@ -51,21 +48,29 @@ public class InicioViewController {
 
     }
 
-    private void iniciarSesion() {
+    public boolean iniciarSesion(String correo, String contrasena) {
         String correo = txtCorreo.getText();
         String contrasena = txtContrasena.getText();
 
-        boolean exito = proxyAutenticador.iniciarSesion(correo, contrasena);
-        if (exito) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Inicio exitoso");
-            alert.setContentText("¡Bienvenido!");
-            alert.showAndWait();
+        boolean encontrado = false;
+
+        for (Usuario u : BaseDeDatosSimulada.usuarios) {
+            if (u.getCorreo().equals(correo) && u.getContrasena().equals(contrasena)) {
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (encontrado) {
+            mostrarAlerta("Inicio de sesión exitoso", Alert.AlertType.INFORMATION);
+            // Aquí puedes redirigir a la vista de perfil
+        } else {
+            mostrarAlerta("Correo o contraseña incorrectos", Alert.AlertType.ERROR);
         }
     }
     @FXML
     void onAbrirRegistro(ActionEvent event) {
-        try { FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Usuario.fxml"));
+        try { FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Us.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual desde el hyperlink
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -79,5 +84,12 @@ public class InicioViewController {
             e.printStackTrace();
         }
         }
+    private void mostrarAlerta(String mensaje, Alert.AlertType tipo){
+        Alert alert = new Alert(tipo);
+        alert.setTitle("Inicio de sesión");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
 
 }
