@@ -4,6 +4,7 @@ import co.edu.uniquindio.registrousuario.registrousuario.model.BaseDeDatosSimula
 import co.edu.uniquindio.registrousuario.registrousuario.model.Notificador;
 import co.edu.uniquindio.registrousuario.registrousuario.model.Usuario;
 import co.edu.uniquindio.registrousuario.registrousuario.model.Validador;
+import javafx.scene.control.Alert;
 
 public class RegistroFacade {
     private final BaseDeDatosSimulada baseDeDatos = BaseDeDatosSimulada.getInstancia();
@@ -17,26 +18,33 @@ public class RegistroFacade {
 
     public void registrarUsuario(String nombre, String correo, String contrasena) {
 
-            // Validar datos
-            if (!validador.validar(nombre, correo, contrasena)) {
-                System.out.println(" Datos inválidos. Verifica nombre, correo y contraseña.");
-                return;
-            }
-
-            // Validar que el correo no esté registrado
-            if (BaseDeDatosSimulada.existeUsuario(correo)) {
-                System.out.println(" El correo ya está registrado.");
-                return;
-            }
-
-            // Crear usuario y guardar
-            Usuario nuevoUsuario = new Usuario(nombre, correo, contrasena);
-            baseDeDatos.guardarUsuario(nuevoUsuario);
-
-            // Simular envío de correo
-            notificador.enviarCorreoBienvenida(nuevoUsuario);
-            System.out.println(" Usuario registrado y notificado correctamente.");
+        // Validar datos
+        if (!validador.validar(nombre, correo, contrasena)) {
+            mostrarAlerta("Datos inválidos", "Verifica que el nombre no esté vacío, el correo sea válido y la contraseña tenga al menos 6 caracteres.");
+            return;
         }
+
+        // Validar que el correo no esté registrado
+        if (BaseDeDatosSimulada.existeUsuario(correo)) {
+            mostrarAlerta("Correo duplicado", "El correo ya está registrado. Usa uno diferente.");
+            return;
+        }
+
+        // Crear usuario y guardar
+        Usuario nuevoUsuario = new Usuario(nombre, correo, contrasena);
+        baseDeDatos.guardarUsuario(nuevoUsuario);
+
+        // Simular envío de correo
+        notificador.enviarCorreoBienvenida(nuevoUsuario);
+        mostrarAlerta("Registro exitoso", "Usuario registrado y correo de bienvenida enviado.");
+        System.out.println("Usuario registrado: " + nombre+" "+correo);    }
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
     }
 
 
