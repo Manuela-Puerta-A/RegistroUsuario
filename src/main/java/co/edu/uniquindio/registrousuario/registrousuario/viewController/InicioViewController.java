@@ -39,7 +39,8 @@ public class InicioViewController {
     @FXML
     private void initialize() {
         if (btnIniciar != null) {
-            btnIniciar.setOnAction(event -> { iniciarSesion();
+            btnIniciar.setOnAction(event -> {
+                iniciarSesion();
                 // Acción para iniciar sesión
             });
         } else {
@@ -48,24 +49,21 @@ public class InicioViewController {
 
     }
 
-    public boolean iniciarSesion(String correo, String contrasena) {
+    public boolean iniciarSesion() {
         String correo = txtCorreo.getText();
         String contrasena = txtContrasena.getText();
 
-        boolean encontrado = false;
+        Usuario usuario = BaseDeDatosSimulada.buscarUsuario(correo, contrasena);
 
-        for (Usuario u : BaseDeDatosSimulada.usuarios) {
-            if (u.getCorreo().equals(correo) && u.getContrasena().equals(contrasena)) {
-                encontrado = true;
-                break;
-            }
-        }
+        if (usuario != null) {
+            mostrarAlerta("Inicio de sesión", Alert.AlertType.valueOf("Bienvenido, " + usuario.getNombre()));
 
-        if (encontrado) {
-            mostrarAlerta("Inicio de sesión exitoso", Alert.AlertType.INFORMATION);
-            // Aquí puedes redirigir a la vista de perfil
+            // Simulación de correo al iniciar sesión
+            System.out.println("Simulación: se ha enviado un correo de bienvenida a " + correo);
+            return true;
         } else {
-            mostrarAlerta("Correo o contraseña incorrectos", Alert.AlertType.ERROR);
+            mostrarAlerta("Error", Alert.AlertType.valueOf("Correo o contraseña incorrectos."));
+            return false;
         }
     }
     @FXML

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.registrousuario.registrousuario.viewController;
 
+import co.edu.uniquindio.registrousuario.registrousuario.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,8 @@ import co.edu.uniquindio.registrousuario.registrousuario.facade.RegistroFacade;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static co.edu.uniquindio.registrousuario.registrousuario.model.BaseDeDatosSimulada.listaUsuarios;
 
 public class UsuarioViewController {
 
@@ -35,7 +38,7 @@ public class UsuarioViewController {
 
     }
 
-    private void registrarUsuario() {
+    private boolean registrarUsuario(Usuario nuevoUsuario) {
         String nombre = txtNombre.getText();
         String correo = txtCorreo.getText();
         String contrasena = txtContrasena.getText();
@@ -45,8 +48,22 @@ public class UsuarioViewController {
             registroFacade.registrarUsuario(nombre, correo, contrasena);
             enviarCorreoBienvenida(nombre);
         }
+        if (correoExiste(nuevoUsuario.getCorreo())) {
+            System.out.println("Este correo ya está registrado.");
+            return false;
+        }
 
+        listaUsuarios.add(nuevoUsuario);
+        return true;
     }
+
+    private boolean correoExiste(String correo) {
+        return listaUsuarios.stream()
+                .anyMatch(usuario -> usuario.getCorreo().equalsIgnoreCase(correo));
+    }
+
+
+}
     private boolean validarDatos(String nombre, String correo, String contrasena) {
         if (nombre == null || nombre.trim().isEmpty()) {
             mostrarAlerta("El nombre no puede estar vacío");
@@ -102,5 +119,5 @@ public class UsuarioViewController {
         }
 
 
-    }
+
 }
