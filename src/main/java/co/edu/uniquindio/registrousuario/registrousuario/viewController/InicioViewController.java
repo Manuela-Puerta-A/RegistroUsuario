@@ -68,7 +68,7 @@ public class InicioViewController {
     }
     @FXML
     void onAbrirRegistro(ActionEvent event) {
-        try { FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Us.fxml"));
+        try { FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Usuario.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual desde el hyperlink
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

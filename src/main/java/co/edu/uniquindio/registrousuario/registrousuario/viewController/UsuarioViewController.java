@@ -75,7 +75,7 @@ public class UsuarioViewController {
         System.out.println("Abrir inicio");
         try {
             // Cargar el archivo FXML de registro
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/Inicio.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/Iniciosesion.fxml"));
             Parent root = loader.load();
 
             // Obtener la escena actual desde el hyperlink
