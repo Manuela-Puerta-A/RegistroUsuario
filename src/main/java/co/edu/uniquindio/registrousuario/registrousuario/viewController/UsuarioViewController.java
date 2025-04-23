@@ -41,41 +41,15 @@ public class UsuarioViewController {
         String contrasena = txtContrasena.getText();
 
         registroFacade.registrarUsuario(nombre, correo, contrasena);
-        if (validarDatos(nombre, correo, contrasena)) {
-            registroFacade.registrarUsuario(nombre, correo, contrasena);
-        }
+
     }
-
-    private boolean validarDatos(String nombre, String correo, String contrasena) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            mostrarAlerta("El nombre no puede estar vacío");
-            return false;
-        }
-        if (correo == null || !correo.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            mostrarAlerta("El correo electrónico no es válido");
-            return false;
-        }
-        if (contrasena == null || !contrasena.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$")) {
-            mostrarAlerta("La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas y números.");
-            return false;
-        }
-
-        return true;
-    }
-    private void mostrarAlerta(String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
-    }
-
-
+    
     @FXML
     void onAbrirInicio(ActionEvent event) {
         System.out.println("Abrir inicio");
         try {
             // Cargar el archivo FXML de registro
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/Iniciosesion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Iniciosesion.fxml"));
             Parent root = loader.load();
 
             // Obtener la escena actual desde el hyperlink
