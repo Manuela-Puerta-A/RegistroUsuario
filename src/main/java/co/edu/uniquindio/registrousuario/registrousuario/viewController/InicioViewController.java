@@ -56,13 +56,12 @@ public class InicioViewController {
         Usuario usuario = BaseDeDatosSimulada.buscarUsuario(correo, contrasena);
 
         if (usuario != null) {
-            mostrarAlerta("Inicio de sesión", Alert.AlertType.valueOf("Bienvenido, " + usuario.getNombre()));
-
+            mostrarAlerta("Bienvenido, " + usuario.getNombre(), Alert.AlertType.INFORMATION);
             // Simulación de correo al iniciar sesión
             System.out.println("Simulación: se ha enviado un correo de bienvenida a " + correo);
             return true;
         } else {
-            mostrarAlerta("Error", Alert.AlertType.valueOf("Correo o contraseña incorrectos."));
+            mostrarAlerta("Correo o contraseña incorrectos.", Alert.AlertType.ERROR);
             return false;
         }
     }
