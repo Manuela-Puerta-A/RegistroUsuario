@@ -2,6 +2,8 @@ package co.edu.uniquindio.registrousuario.registrousuario.viewController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -63,19 +65,19 @@ public class InicioViewController {
     }
     @FXML
     void onAbrirRegistro(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Usuario.fxml"));
-            Scene scene = new Scene(loader.load());
+        try { FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Usuario.fxml"));
+            Parent root = loader.load();
+            // Obtener la escena actual desde el hyperlink
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            Stage stage = (Stage) linkIniciarsesion.getScene().getWindow();
-
+            // Cambiar la escena
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
+        }
 
 }
