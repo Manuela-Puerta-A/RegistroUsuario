@@ -1,6 +1,5 @@
 package co.edu.uniquindio.registrousuario.registrousuario.viewController;
 
-import co.edu.uniquindio.registrousuario.registrousuario.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +11,6 @@ import co.edu.uniquindio.registrousuario.registrousuario.facade.RegistroFacade;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
-import static co.edu.uniquindio.registrousuario.registrousuario.model.BaseDeDatosSimulada.listaUsuarios;
 
 public class UsuarioViewController {
 
@@ -38,7 +35,7 @@ public class UsuarioViewController {
 
     }
 
-    private boolean registrarUsuario(Usuario nuevoUsuario) {
+    private void registrarUsuario() {
         String nombre = txtNombre.getText();
         String correo = txtCorreo.getText();
         String contrasena = txtContrasena.getText();
@@ -46,24 +43,9 @@ public class UsuarioViewController {
         registroFacade.registrarUsuario(nombre, correo, contrasena);
         if (validarDatos(nombre, correo, contrasena)) {
             registroFacade.registrarUsuario(nombre, correo, contrasena);
-            enviarCorreoBienvenida(nombre);
         }
-        if (correoExiste(nuevoUsuario.getCorreo())) {
-            System.out.println("Este correo ya está registrado.");
-            return false;
-        }
-
-        listaUsuarios.add(nuevoUsuario);
-        return true;
     }
 
-    private boolean correoExiste(String correo) {
-        return listaUsuarios.stream()
-                .anyMatch(usuario -> usuario.getCorreo().equalsIgnoreCase(correo));
-    }
-
-
-}
     private boolean validarDatos(String nombre, String correo, String contrasena) {
         if (nombre == null || nombre.trim().isEmpty()) {
             mostrarAlerta("El nombre no puede estar vacío");
@@ -82,20 +64,11 @@ public class UsuarioViewController {
 
         return true;
     }
-
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.WARNING);
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
-    }
-
-    private void enviarCorreoBienvenida(String nombre) {
-        Alert bienvenida = new Alert(Alert.AlertType.INFORMATION);
-        bienvenida.setTitle("Bienvenido");
-        bienvenida.setHeaderText(null);
-        bienvenida.setContentText("¡Bienvenido/a " + nombre + "! Tu registro fue exitoso.");
-        bienvenida.showAndWait();
     }
 
 
@@ -104,8 +77,9 @@ public class UsuarioViewController {
         System.out.println("Abrir inicio");
         try {
             // Cargar el archivo FXML de registro
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Iniciosesion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/Inicio.fxml"));
             Parent root = loader.load();
+
             // Obtener la escena actual desde el hyperlink
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -119,5 +93,5 @@ public class UsuarioViewController {
         }
 
 
-
+    }
 }

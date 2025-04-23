@@ -16,10 +16,28 @@ public class RegistroFacade {
 
 
     public void registrarUsuario(String nombre, String correo, String contrasena) {
-        Usuario nuevoUsuario = new Usuario(nombre, correo, contrasena);
-        baseDeDatos.guardarUsuario(nuevoUsuario);
-        System.out.println("Usuario registrado: " + nombre);
+
+            // Validar datos
+            if (!validador.validar(nombre, correo, contrasena)) {
+                System.out.println(" Datos inválidos. Verifica nombre, correo y contraseña.");
+                return;
+            }
+
+            // Validar que el correo no esté registrado
+            if (BaseDeDatosSimulada.existeUsuario(correo)) {
+                System.out.println(" El correo ya está registrado.");
+                return;
+            }
+
+            // Crear usuario y guardar
+            Usuario nuevoUsuario = new Usuario(nombre, correo, contrasena);
+            baseDeDatos.guardarUsuario(nuevoUsuario);
+
+            // Simular envío de correo
+            notificador.enviarCorreoBienvenida(nuevoUsuario);
+            System.out.println(" Usuario registrado y notificado correctamente.");
+        }
     }
 
 
-}
+

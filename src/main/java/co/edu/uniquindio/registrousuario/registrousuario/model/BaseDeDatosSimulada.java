@@ -8,7 +8,7 @@ public class BaseDeDatosSimulada {
         return listaUsuarios;
     }
     private static BaseDeDatosSimulada instancia;
-    public static final List<Usuario> listaUsuarios = new ArrayList<>();
+    private static final List<Usuario> listaUsuarios = new ArrayList<>();
     public static BaseDeDatosSimulada getInstancia() {
         if (instancia == null) {
             instancia = new BaseDeDatosSimulada();
