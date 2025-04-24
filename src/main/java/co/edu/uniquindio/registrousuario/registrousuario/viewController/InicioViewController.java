@@ -60,6 +60,9 @@ public class InicioViewController {
             // Simulación de correo al iniciar sesión
             System.out.println("Simulación: se ha enviado un correo de bienvenida a " + correo);
             return true;
+
+
+
         } else {
             mostrarAlerta("Correo o contraseña incorrectos.", Alert.AlertType.ERROR);
             return false;
