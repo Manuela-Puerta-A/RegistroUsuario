@@ -6,10 +6,14 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 public class PerfilViewController {
     @FXML
     private ResourceBundle resources;
@@ -40,6 +44,23 @@ public class PerfilViewController {
         }
     }
 
+    @FXML
+    void onVolver(ActionEvent event) {
+
+        try { FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Usuario.fxml"));
+            Parent root = loader.load();
+            // Obtener la escena actual desde el hyperlink
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Cambiar la escena
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     void initialize() {}
 

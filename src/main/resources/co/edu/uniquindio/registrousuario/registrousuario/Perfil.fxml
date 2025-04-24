@@ -23,7 +23,7 @@
             </Label>
             <Label layoutX="125.0" layoutY="140.0" text="Correo: " />
             <Label fx:id="lblCorreoUsuario" layoutX="166.0" layoutY="103.0" />
-            <Hyperlink fx:id="linkVolverRegistro" layoutX="347.0" layoutY="234.0" text="Volver al Registro" />
+            <Hyperlink fx:id="linkVolverRegistro" onAction="#onVolver" layoutX="347.0" layoutY="234.0" text="Volver al Registro" />
             <Button fx:id="bntCerrarsesion" layoutX="120.0" layoutY="233.0" mnemonicParsing="false" onAction="#onCerrarSesion" text="Cerrar sesion" />
          </children>
       </AnchorPane>
