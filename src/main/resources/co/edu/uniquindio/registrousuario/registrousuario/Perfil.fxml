@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="280.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.registrousuario.registrousuario.viewController.PerfilViewController">
    <children>
-      <AnchorPane prefHeight="297.0" prefWidth="563.0">
+      <AnchorPane prefHeight="393.0" prefWidth="544.0">
          <children>
             <Label layoutX="146.0" layoutY="35.0" text="Bienvenido">
                <font>
