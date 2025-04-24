@@ -3,6 +3,8 @@ package co.edu.uniquindio.registrousuario.registrousuario.viewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import co.edu.uniquindio.registrousuario.registrousuario.model.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class PerfilViewController {
+    private Usuario usuario;
     @FXML
     private ResourceBundle resources;
 
@@ -32,6 +35,11 @@ public class PerfilViewController {
 
     @FXML
     private Hyperlink linkVolverRegistro;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+        lblNombreUsuario.setText(usuario.getNombre());
+        lblCorreoUsuario.setText(usuario.getCorreo());
+    }
 
     @FXML
     void onCerrarSesion(ActionEvent event) {

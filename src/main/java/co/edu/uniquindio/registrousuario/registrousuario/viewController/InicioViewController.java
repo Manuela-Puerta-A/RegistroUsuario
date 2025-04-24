@@ -60,21 +60,23 @@ public class InicioViewController {
             System.out.println("Simulación: se ha enviado un correo de bienvenida a " + correo);
 
             // Cambiar a la vista de perfil
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Perfil.fxml"));
-                Parent root = loader.load();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/registrousuario/registrousuario/Perfil.fxml"));
+                    Parent root = loader.load();
 
-                // Si quieres pasar el usuario al controlador, puedes hacerlo así:
-                // PerfilController perfilController = loader.getController();
-                // perfilController.setUsuario(usuario);
+                    // Si quieres pasar el usuario al controlador, puedes hacerlo así:
+                    // PerfilController perfilController = loader.getController();
+                    // perfilController.setUsuario(usuario);
+                    // Obtener el controlador del perfil
+                    PerfilViewController perfilController = loader.getController();
+                    perfilController.setUsuario(usuario);
+                    Stage stage = (Stage) btnIniciar.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
 
-                Stage stage = (Stage) btnIniciar.getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
-                return true; // Este return va aquí, después de que todo salga bien
-            } catch (IOException e) {
+                    return true; // Este return va aquí, después de que todo salga bien
+                } catch (IOException e) {
                 e.printStackTrace();
                 return false; // Si falla la carga del perfil
             }
